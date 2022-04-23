@@ -43,7 +43,7 @@ function removeRow(e) {
 }
 
 function changeRowColor(e) {
-    e.target.closest('li').classList.add('success');
+    e.target.closest('li').classList.toggle('success');
 }
 
 function addToDoRow(toDoRow) {
