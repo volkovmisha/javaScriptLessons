@@ -1,10 +1,45 @@
 .form-wrapper {
     display: flex;
 }
-.form-wrapper > * {
+
+.todo__form {
+    display: flex;
+    flex: 1 1 75%;
+}
+
+.todo__form input {
     padding: 0 10px;
 }
+.todo__form-button {
+    flex: 1 1 25%;
+}
+.todo__form span {
+    display: block;
+}
+
+.todo__form label {
+    margin: 0 10px;
+    flex: 1 1 30%
+}
+
 .todo__list {
     max-height: 400px;
     overflow-y: auto;
+    padding: 20px 0 0;
+}
+
+.todo__list li {
+    display: flex;
+}
+
+.row__wrapper div {
+    flex: 1 1 30%;
+    margin: 0 10px;
+}
+.row__wrapper {
+    display: flex;
+    flex: 0 1 75%;
+}
+.row__wrapper + button{
+    flex: 1 1 25%;
 }
