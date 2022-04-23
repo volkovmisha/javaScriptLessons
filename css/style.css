@@ -1,0 +1,10 @@
+.form-wrapper {
+    display: flex;
+}
+.form-wrapper > * {
+    padding: 0 10px;
+}
+.todo__list {
+    max-height: 400px;
+    overflow-y: auto;
+}

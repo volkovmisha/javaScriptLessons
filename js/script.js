@@ -1,24 +1,23 @@
-function counter() {
-    let number = 7;
-    return function () {
-        let array = [];
-        for (let i = number; i >= 0; i--) {
-            array.push(i);
-        }
-        return array
-    }
+const inputNameE = document.getElementById('name')
+const btnE = document.getElementById('addToDo')
+const todoFormE = document.getElementById('todoForm')
+const todoList = document.getElementById('todoList')
+todoFormE.addEventListener('keyup',changeTodoForm)
+btnE.addEventListener('click', onAddButtonClick)
+
+function changeTodoForm(e) {
+
+    e.target.value.length ? btnE.disabled = false : btnE.disabled = true;
+}
+function onAddButtonClick() {
+    const listElementValue = inputNameE.value;
+    const listElement = document.createElement('li')
+    listElement.textContent = listElementValue;
+    todoList.append(listElement)
+    clearForm()
 }
 
-const array = counter();
-
-function recursion(array, index, summ) {
-    if (index === 0) {
-        return summ += array[index];
-    } else {
-        return summ += array[index] + recursion(array, --index, summ)
-    }
+function clearForm() {
+    todoFormE.reset()
+    btnE.disabled = true;
 }
-
-console.log(array())
-const summ = recursion(array(), 7, 0)
-console.log(summ)
