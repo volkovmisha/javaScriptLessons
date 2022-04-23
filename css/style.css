@@ -29,7 +29,14 @@
 }
 
 .todo__list li {
+    padding: 10px;
     display: flex;
+    margin-bottom: 10px;
+    background: rgba(255,255,0,0.3);
+    transition: all ease-in-out 1s;
+}
+.todo__list li.success {
+    background: rgba(0,255,0,0.3);
 }
 
 .row__wrapper div {
