@@ -3,8 +3,7 @@ const btnE = document.getElementById('addToDo')
 const todoFormE = document.getElementById('todoForm')
 const todoList = document.getElementById('todoList')
 const todoFormInputsE = document.querySelectorAll('input')
-const rowTemplateE = document.getElementById('rowTemplate')
-
+let idCounter = 0;
 todoFormE.addEventListener('keyup', changeTodoForm)
 btnE.addEventListener('click', onAddButtonClick)
 todoList.addEventListener('click', clickOnToDoList)
@@ -20,13 +19,13 @@ function onAddButtonClick() {
 }
 
 function createToDoRow() {
-    return `<li id="todo-item${todoList.children.length}">
+    return `<li id="todo-item${idCounter}">
                 <div class="row__wrapper">
                     <div>
                             ${inputNameE.value}
                     </div>
                 </div>
-                <button data-attr="${todoList.children.length}">x</button>
+                <button data-attr="${idCounter++}">x</button>
             </li>`
 }
 
