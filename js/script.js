@@ -4,12 +4,19 @@ const todoFormE = document.getElementById('todoForm')
 const todoList = document.getElementById('todoList')
 const todoFormInputsE = document.querySelectorAll('input')
 let idCounter = 0;
+const body = document.querySelector('body');
 todoFormE.addEventListener('keyup', changeTodoForm)
 btnE.addEventListener('click', onAddButtonClick)
 todoList.addEventListener('click', clickOnToDoList)
+body.addEventListener('keyup', checkKeysCombo)
 
 function changeTodoForm() {
     isFieldsNotEmpty()
+}
+function checkKeysCombo(e) {
+    if(e.shiftKey === true && e.key === "Backspace") {
+        clearForm();
+    }
 }
 
 function onAddButtonClick() {
