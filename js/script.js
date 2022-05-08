@@ -58,6 +58,6 @@ const TOPPINGS = {
 const hamburger = new Hamburger(SIZE.BIG)
 hamburger.addTopping(TOPPINGS.CHEESE)
 hamburger.addTopping(TOPPINGS.MAYO)
-console.log(hamburger.checkCalories())
-console.log(hamburger.checkCost())
+console.log("Price with sauce:",hamburger.checkCost())
+console.log("Callories with sauce:",hamburger.checkCalories())
 
