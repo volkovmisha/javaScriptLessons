@@ -1,72 +1,63 @@
-const inputNameE = document.getElementById('name')
-const btnE = document.getElementById('addToDo')
-const todoFormE = document.getElementById('todoForm')
-const todoList = document.getElementById('todoList')
-const todoFormInputsE = document.querySelectorAll('input')
-let idCounter = 0;
-const body = document.querySelector('body');
-todoFormE.addEventListener('keyup', changeTodoForm)
-btnE.addEventListener('click', onAddButtonClick)
-todoList.addEventListener('click', clickOnToDoList)
-body.addEventListener('keyup', checkKeysCombo)
+class Hamburger {
+    topping = [];
 
-function changeTodoForm() {
-    isFieldsNotEmpty()
-}
-function checkKeysCombo(e) {
-    if(e.shiftKey === true && e.key === "Backspace") {
-        clearForm();
+    constructor(size) {
+        this.size = size;
+    }
+
+    addTopping(topping) {
+        this.topping.push(topping)
+    }
+
+    checkCalories() {
+        return this.topping.reduce((acc, topping) => acc += topping.CALORIES, 0) + this.size.CALORIES
+    }
+
+    checkCost() {
+        return this.topping.reduce((acc, topping) => acc += topping.COST, 0) + this.size.COST
     }
 }
 
-function onAddButtonClick() {
-    const toDoRow = createToDoRow()
-    addToDoRow(toDoRow)
-    clearForm()
+const SIZE = {
+    SMALL: {
+        COST: 50,
+        CALORIES: 20
+    },
+    MEDIUM: {
+        COST: 75,
+        CALORIES: 30
+    },
+    BIG: {
+        COST: 100,
+        CALORIES: 40
+    }
 }
-
-function createToDoRow() {
-    return `<li id="todo-item${idCounter}">
-                <div class="row__wrapper">
-                    <div>
-                            ${inputNameE.value}
-                    </div>
-                </div>
-                <button data-attr="${idCounter++}">x</button>
-            </li>`
-}
-
-function clickOnToDoList(e) {
-    if (e.target.localName === 'button') {
-        removeRow(e)
-    } else if (e.target.localName !== 'ol') {
-        changeRowColor(e)
+const TOPPINGS = {
+    CHEESE: {
+        COST: 10,
+        CALORIES: 20
+    },
+    SALAD: {
+        COST: 20,
+        CALORIES: 5
+    },
+    POTATO: {
+        COST: 15,
+        CALORIES: 10
+    },
+    SPICE: {
+        COST: 15,
+        CALORIES: 0
+    },
+    MAYO: {
+        COST: 20,
+        CALORIES: 5
     }
 }
 
-function removeRow(e) {
-    document.getElementById('todo-item' + e.target.getAttribute('data-attr')).remove();
-}
+const hamburger = new Hamburger(SIZE.BIG)
+hamburger.addTopping(TOPPINGS.CHEESE)
+hamburger.addTopping(TOPPINGS.MAYO)
+console.log(hamburger.checkCalories())
+console.log(hamburger.checkCost())
 
-function changeRowColor(e) {
-    e.target.closest('li').classList.toggle('success');
-}
-
-function addToDoRow(toDoRow) {
-    todoList.innerHTML += toDoRow
-}
-
-function clearForm() {
-    todoFormE.reset()
-    btnE.disabled = true;
-}
-
-function isFieldsNotEmpty() {
-    let isDisabled = false;
-    todoFormInputsE.forEach(i => {
-        if (!i.value.length) {
-            isDisabled = true;
-        }
-    })
-    isDisabled ? btnE.disabled = true : btnE.disabled = false;
-}
