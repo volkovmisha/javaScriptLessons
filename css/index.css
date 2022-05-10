@@ -6,6 +6,7 @@ img {
     display: block;
     max-width: 100%;
     height: auto;
+    color: #000000;
 }
 body {
     margin: 0;
