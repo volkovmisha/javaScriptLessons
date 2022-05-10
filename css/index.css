@@ -3,11 +3,9 @@
     background-color: lightgoldenrodyellow;
 }
 img {
-    display: block;
-    max-width: 100%;
-    height: auto;
-    color: white;
-    background-color: white;
+   column-gap: 10px;
+    box-shadow: indianred;
+    transition: auto;
 }
 body {
     margin: 0;
