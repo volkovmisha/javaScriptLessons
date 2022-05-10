@@ -1,0 +1,226 @@
+html
+  overflow-x: hidden
+
+@import "mixins"
+@import "two"
+//6614 байт
+//8192 байт
+body
+  margin: 0
+$prox : ProximaNova
+$tt: ease-in-out 0.3s all
+$blue: #242C64
+$yellow : #FFB55A
+$gray: #D0D6DE
+$purple: #5373FB
+$green:  #29C290
+$red:  #FD181F
+$black: #141939
+
+.not-found
+  min-height: 70vh
+  display: flex
+  align-items: center
+  justify-content: center
+  //background: url('../img/form-bg.png')
+  background-position: center center
+  background-size: cover
+
+  &__inner
+    max-width: 350px
+    text-align: center
+    h1
+      font: 800 38px $prox
+      margin-bottom: 18px
+    h2
+      font: 800 22px $prox
+      margin-bottom: 18px
+    p
+      line-height: 150%
+    a
+      display: flex
+      align-items: center
+      justify-content: center
+      color: #FFFFFF
+      transition: $tt
+      border: 1px solid $yellow
+      background: $yellow
+      width: 287px
+      margin: 30px auto
+      height: 54px
+      border-radius: 100px
+      &:hover
+        color: $yellow
+        background: transparent
+.modal
+  opacity: 0
+  visibility: hidden
+  position: fixed
+  top: 0
+  left: 0
+  right: 0
+  bottom: 100%
+  background-color: rgba(0,0,0,.5)
+  transition: all .3s ease-in-out
+  display: flex
+  align-items: center
+  z-index: 99
+  &.youtube-modal
+    .modal-body
+      max-width: initial
+      width: 70vh
+      height: 50vh
+      padding: 0
+      iframe
+        width: 100%
+        height: 100%
+  &.active
+    bottom: 0
+    opacity: 1
+    visibility: visible
+  .modal-body
+    max-width: 460px
+    background: #fff
+    position: relative
+    padding: 20px
+    margin: auto
+    width: 100%
+  &.feedback-modal
+    .modal-body
+      border-top: 6px solid $green
+      box-shadow: 0px 0px 20px rgba(25, 30, 66, 0.08)
+      border-radius: 6px
+      padding-top: 60px
+  .modal-close
+    position: absolute
+    top: 22px
+    right: 16px
+    width: 54px
+    height: 54px
+    display: flex
+    align-items: center
+    justify-content: center
+    border: 1px solid #F2F7FD
+    box-shadow: 0px 0px 20px rgba(25, 30, 66, 0.08)
+    border-radius: 100%
+
+  .modal-body-inner
+    max-width: 340px
+    margin: auto
+    .modal-title
+      text-align: center
+      font: 800 22px $prox
+      margin-bottom: 30px
+    button
+      width: 160px
+      height: 54px
+      display: flex
+      align-items: center
+      justify-content: center
+      color: #FFF
+      background: $yellow
+      border: 1px solid $yellow
+      transition: $tt
+      font: 600 14px ProximaNova
+      border-radius: 100px
+      margin: auto
+      &:hover
+        background: transparent
+        color: $yellow
+  label
+    display: block
+    margin-bottom: 24px
+    position: relative
+
+    .error
+      padding-left: 23px
+      position: absolute
+      bottom: -17px
+      font-size: 13px
+      color: $red
+      display: none
+    .jq-selectbox
+      width: 100%
+      &.changed
+        .jq-selectbox__select
+          background: #FFFFFF
+      &__select
+        background: #F9FAFB
+        border: 0.5px solid #D0D6DE
+        border-radius: 100px
+        max-width: 340px
+        width: 100%
+        display: flex
+        align-items: center
+        height: 50px
+        padding: 0 30px
+        transition: $tt
+        color: #242C64
+        line-height: normal
+        font: 400 16px / normal $prox
+
+      &__trigger
+        border-left: none
+        &-arrow
+          top: 24px
+    .close
+      position: absolute
+      right: 20px
+      bottom: 18px
+      opacity: 0
+      transition: $tt
+    .title
+      display: flex
+      align-items: center
+      opacity: 0.8
+      font: 400 13px $prox
+      padding-left: 23px
+      margin-bottom: 12px
+      &.req
+        &:before
+          content: ''
+          width: 4px
+          height: 4px
+          border-radius: 100%
+          background: $red
+          margin-right: 5px
+    input
+      background: #F9FAFB
+      border: 0.5px solid #D0D6DE
+      border-radius: 100px
+      max-width: 340px
+      width: 100%
+      display: block
+      height: 50px
+      padding: 0 30px
+      transition: $tt
+      color: #242C64
+      line-height: normal
+      font-size: 16px
+      &.filled
+        background: #FFFFFF
+        & + img
+          opacity: 0.2
+      &:focus
+        background: #FFFFFF
+        & + img
+          opacity: 0.2
+    textarea
+      resize: none
+      background: #F9FAFB
+      border: 0.5px solid #D0D6DE
+      border-radius: 26px
+      max-width: 340px
+      width: 100%
+      display: block
+      height: 92px
+      padding: 15px 30px
+      transition: $tt
+      color: #242C64
+      line-height: normal
+      font: 400 16px $prox
+
+      &.filled
+        background: #FFFFFF
+      &:focus
+        background: #FFFFFF

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <meta name="author" content="">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <link rel="stylesheet" href="css/index.css">
+    </head>
+    <style>
+        .list   {
+            /*
+            Для разделения контейнера-сетки на столбцы и строки используются свойства
+            grid-template-columns, grid-template-rows и grid-template-areas */
+
+            /*
+        /*display: grid;
+        grid-template-columns: 50px 100px 200px 250px;
+        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 5fr;
+        grid-template-columns: repeat(5,1fr);
+        grid-template-columns: repeat(auto-fit, 300px);
+        grid-template-columns: repeat(auto-fit,minmax(300px, 500px));
+        grid-template-columns: repeat(auto-fit,minmax(300px, 1fr));
+        */
+
+        }
+       /* .body {
+            display: grid;
+            grid-template-areas:
+            "header header header"
+            "sidebar main main"
+            "footer footer footer"
+        }
+        header {
+            grid-area: header;
+        }
+        aside {
+            grid-area: siderbar;
+        }
+        footer {
+            grid-area: footer;
+        }
+
+        body {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-template-rows: 100px auto 100px;
+        }*/
+
+        body {
+            display: grid;
+            grid-template-areas:
+            "header header header header"
+            "banner banner banner banner"
+            "sidebar main main main"
+            "sidebar main main main"
+            "news news reviews reviews"
+            "footer footer footer footer"
+        }
+        header {
+            grid-area: header;
+            grid-column: 1 / 12;
+            background: lightcoral;
+        }
+        aside {
+            grid-area: sidebar;
+            grid-column: 1 / 3;
+            background: lightgreen;
+        }
+        main {
+            grid-area: main;
+            grid-column: 3 / 9;
+        }
+        footer {
+            grid-area: footer;
+            grid-column: 1 / 12;
+            background: lightsalmon;
+        }
+        rightbar {
+            grid-area: rightbar;
+            background: lightgray;
+            grid-column: 9 / 12;
+        }
+
+
+    </style>
+
+    <body>
+        <header>
+            <div class="header__logo">
+                THIS IS LOGO
+            </div>
+            <div class="header__nav">
+                THIS IS NAV
+            </div>
+        </header>
+        <aside>
+            THIS IS ASIDE
+        </aside>
+        <main>
+            <div class="card ">
+                <img src="img/cat4.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+            <div class="card ">
+                <img src="img/cat3.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="img/cat2.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+
+        </main>
+        <footer>
+            THIS IS FOOTER
+        </footer>
+    <rightbar>this is rightbar</rightbar>
+    </body>
+
+</html>
