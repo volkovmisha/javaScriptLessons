@@ -3,11 +3,10 @@
     background-color: lightgoldenrodyellow;
 }
 img {
-    display: block;
-    max-width: 100%;
-    height: auto;
-    color: white;
-    background-color: #F2F7FD;
+    display: flex;
+    height: 100vh;
+    padding: 10px;
+    overflow: hidden;
 }
 body {
     margin: 0;
