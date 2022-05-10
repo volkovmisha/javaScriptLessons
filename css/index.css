@@ -8,6 +8,9 @@ img {
     height: auto;
     color: white;
     background-color: #000000;
+   column-gap: 10px;
+    box-shadow: indianred;
+    transition: auto;
 }
 body {
     margin: 0;
