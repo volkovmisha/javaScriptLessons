@@ -1,63 +1,49 @@
-class Hamburger {
-    topping = [];
+class Group {
 
-    constructor(size) {
-        this.size = size;
+    constructor() {
+         this.studentsList = [];
+    }
+    addStudent(student) {
+        this.studentsList.push(student);
+    }
+    static getStudent() {
+        return this.studentsList;
     }
 
-    addTopping(topping) {
-        this.topping.push(topping)
-    }
-
-    checkCalories() {
-        return this.topping.reduce((acc, topping) => acc += topping.CALORIES, 0) + this.size.CALORIES
-    }
-
-    checkCost() {
-        return this.topping.reduce((acc, topping) => acc += topping.COST, 0) + this.size.COST
-    }
-}
-
-const SIZE = {
-    SMALL: {
-        COST: 50,
-        CALORIES: 20
-    },
-    MEDIUM: {
-        COST: 75,
-        CALORIES: 30
-    },
-    BIG: {
-        COST: 100,
-        CALORIES: 40
-    }
-}
-const TOPPINGS = {
-    CHEESE: {
-        COST: 10,
-        CALORIES: 20
-    },
-    SALAD: {
-        COST: 20,
-        CALORIES: 5
-    },
-    POTATO: {
-        COST: 15,
-        CALORIES: 10
-    },
-    SPICE: {
-        COST: 15,
-        CALORIES: 0
-    },
-    MAYO: {
-        COST: 20,
-        CALORIES: 5
+    getAverageMark() {
+        return (this.studentsList.reduce((acc, student) => {
+            acc+= (student.marks.reduce((acc, mark) => {
+             acc+= mark;
+             return acc
+            },0)) / student.marks.length
+            return acc
+        },0) / this.studentsList.length)
     }
 }
 
-const hamburger = new Hamburger(SIZE.BIG)
-hamburger.addTopping(TOPPINGS.CHEESE)
-hamburger.addTopping(TOPPINGS.MAYO)
-console.log("Price with sauce:",hamburger.checkCost())
-console.log("Callories with sauce:",hamburger.checkCalories())
+class Student {
+    constructor(name,marks) {
+        this.name = name;
+        this.marks = marks;
+    }
+}
 
+const jhon = new Student('jhon',[3,4,6,8])
+const jhon2 = new Student('jhon2',[5,6,8,1])
+const jhon3 = new Student('jhon3',[5,5,5,3])
+const jhon4 = new Student('jhon',[10,10,4,3])
+
+console.log(jhon)
+console.log(jhon2)
+console.log(jhon3)
+console.log(jhon4)
+
+const group1 = new Group()
+group1.addStudent(jhon)
+group1.addStudent(jhon2)
+group1.addStudent(new Student('IVAN',[1,0,0,2]))
+
+
+console.log(group1)
+console.log(group1.getAverageMark())
+console.log(group1.getStudent())
