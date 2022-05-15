@@ -1,49 +1,38 @@
-class Group {
+class Tab {
+    children = []
+    static CLASSES = {
+        title: 'tab-title',
+        body: 'tab-body'
+    }
+    constructor(element) {
+        this.children = [...element.children]
+        this.addChildrenClasses()
+        this.children.forEach(e => console.log(e))
+    }
 
-    constructor() {
-         this.studentsList = [];
+    addChildrenClasses() {
+        this.children.forEach(e => {
+            const [title, body] = e.children
+            title.classList.add(Tab.CLASSES.title)
+            body.classList.add(Tab.CLASSES.body)
+            /* кстати насколько легально вообще задавать слушатели напрямую, вот так? */
+            title.addEventListener('click', this.changeTab)
+            title.addEventListener('mouseover', this.hoverTab)
+            title.addEventListener('mouseout', this.unHoverTab)
+        })
     }
-    addStudent(student) {
-        this.studentsList.push(student);
+    changeTab(e) {
+        const prevClicks = document.querySelectorAll('.selected')
+        prevClicks.length ? prevClicks[0].classList.remove('selected') : '';
+        e.target.classList.add('selected')
     }
-    static getStudent() {
-        return this.studentsList;
+    hoverTab(e) {
+        e.target.classList.add('hover')
     }
-
-    getAverageMark() {
-        return (this.studentsList.reduce((acc, student) => {
-            acc+= (student.marks.reduce((acc, mark) => {
-             acc+= mark;
-             return acc
-            },0)) / student.marks.length
-            return acc
-        },0) / this.studentsList.length)
+    unHoverTab(e) {
+        e.target.classList.remove('hover')
     }
 }
 
-class Student {
-    constructor(name,marks) {
-        this.name = name;
-        this.marks = marks;
-    }
-}
-
-const jhon = new Student('jhon',[3,4,6,8])
-const jhon2 = new Student('jhon2',[5,6,8,1])
-const jhon3 = new Student('jhon3',[5,5,5,3])
-const jhon4 = new Student('jhon',[10,10,4,3])
-
-console.log(jhon)
-console.log(jhon2)
-console.log(jhon3)
-console.log(jhon4)
-
-const group1 = new Group()
-group1.addStudent(jhon)
-group1.addStudent(jhon2)
-group1.addStudent(new Student('IVAN',[1,0,0,2]))
-
-
-console.log(group1)
-console.log(group1.getAverageMark())
-console.log(group1.getStudent())
+const targetElement = document.querySelector('.tabs')
+const tab = new Tab(targetElement)

@@ -1,59 +1,39 @@
-.form-wrapper {
-    display: flex;
-}
-
-.todo__form {
-    display: flex;
-    flex: 1 1 75%;
-}
-
-.todo__form input {
-    padding: 0 10px;
-}
-.todo__form-button {
-    flex: 1 1 25%;
-}
-.todo__form span {
-    display: block;
-}
-
-.todo__form label {
-    margin: 0 10px;
-    flex: 1 1 30%
-}
-
-.todo__list {
-    max-height: 400px;
-    overflow-y: auto;
-    padding: 20px 0 0;
-}
-
-.todo__list li {
+.tab-title {
+    font-size: 24px;
     padding: 10px;
-    display: flex;
-    margin-bottom: 10px;
-    background: rgba(255,255,0,0.3);
-    transition: all ease-in-out 1s;
+    border-bottom: 3px solid transparent;
+    transition: all ease-in-out 0.3s;
     position: relative;
+
 }
-.todo__list li.success {
-    background: rgba(0,255,0,0.3);
+.tab-title.hover{
+    border-bottom-color: indianred;
+    cursor: pointer;
+}
+.tab-title.selected {
+    border-bottom-color: royalblue;
+}
+.tab-title.selected + div {
+    transform: scaleX(1);
 }
 
-.row__wrapper div {
-    flex: 1 1 30%;
-    margin: 0 10px;
-}
-.row__wrapper {
-    display: flex;
-    flex: 0 1 75%;
-}
-.row__wrapper + button{
-    flex: 1 1 25%;
-    position: absolute;
-    top: 0;
+.tab-body {
+    left: 0;
     right: 0;
-    width: 20px;
-    height: 20px;
-    background: transparent;
+    padding: 10px;
+    position: absolute;
+    transform: scaleX(0);
+    transition: all ease-in-out 0.3s;
+    transform-origin: -50% 0;
+    background-color: #e1e1e1;
+}
+.tabs {
+    display: flex;
+}
+.tabs > div {
+    flex: 1 1 25%;
+    background-color: #e1e1e1;
+}
+body {
+    margin: 0;
 }
