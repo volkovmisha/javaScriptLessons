@@ -1,24 +1,23 @@
 class Tab {
-    children = []
+    #children = []
     static CLASSES = {
         title: 'tab-title',
         body: 'tab-body'
     }
     constructor(element) {
-        this.children = [...element.children]
-        this.addChildrenClasses()
-        this.children.forEach(e => console.log(e))
+        this.element = element
+        this.#children = [...element.children]
+        this.addchildrenClasses()
+        this.element.addEventListener('click', this.changeTab)
+        this.element.addEventListener('mouseover', this.hoverTab)
+        this.element.addEventListener('mouseout', this.unHoverTab)
     }
 
-    addChildrenClasses() {
-        this.children.forEach(e => {
+    addchildrenClasses() {
+        this.#children.forEach(e => {
             const [title, body] = e.children
             title.classList.add(Tab.CLASSES.title)
             body.classList.add(Tab.CLASSES.body)
-            /* кстати насколько легально вообще задавать слушатели напрямую, вот так? */
-            title.addEventListener('click', this.changeTab)
-            title.addEventListener('mouseover', this.hoverTab)
-            title.addEventListener('mouseout', this.unHoverTab)
         })
     }
     changeTab(e) {
