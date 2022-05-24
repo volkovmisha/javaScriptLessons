@@ -1,41 +1,158 @@
-const inpE = document.getElementById('username');
-const buttonE = document.getElementById('submitRequest');
-const respE = document.getElementById('responce');
-const url = 'https://api.github.com/users/';
+const todoCreateTitleE = document.getElementById('title'),
+    todoCreateBodyE = document.getElementById('body'),
+    buttonE = document.getElementById('submitCreate'),
+    respE = document.getElementById('responce'),
+    todoFormE = document.getElementById('todoForm'),
+    controlE = document.getElementById('control_panel'),
+    todoFormInputsE = document.querySelectorAll('.createInput');
 
-buttonE.addEventListener('click', submitRequest)
+const api = new Api();
+renderResponce();
+let todoList;
 
-function submitRequest() {
-    respE.innerHTML = ''
-    fetch(url + inpE.value)
-        .then((r) => {
-            if(r.status == 200) {
-                r.json().then(r => renderAnswer(r))
-            } else {
-               renderError(r.status)
-            }
-        });
+function renderResponce() {
+    api.getTodos().then(r => {
+        todoList = r;
+        renderAnswer(todoList)
+    });
 }
 
 function renderAnswer(r) {
-    const userInfo = document.createElement('p');
-    userInfo.innerHTML =  `<p>repos: ${r.public_repos}</p>` +
-        `<p>followers: ${r.followers}</p>` +
-        `<p>following: ${r.following}</p>`
-    const userAvatar = document.createElement('img')
-    userAvatar.src = r.avatar_url;
+    if (r.length) {
+        respE.classList.add('filled')
+        respE.innerHTML = r.map(e => renderToDoItem(e)).join('');
+    } else {
+        respE.classList.remove('filled');
+    }
+}
 
-    respE.append(userInfo)
-    respE.append(userAvatar)
+function renderToDoItem(e) {
+    return `<div class="todo-item ${e.isComplete ? 'finished' : 'inProcess'}" key="${e.id}"> 
+            <div>
+                <p>${e.title}</p>
+                <p>${e.body}</p>
+                <p>${e.isComplete ? new Date(e.completeDate).toLocaleString("ru") : new Date(e.createDate).toLocaleString("ru")}</p>
+            </div>
+             <p class="complete ${e.isComplete ? 'hidden' : 'visible'}" >Finish</p>
+             <p class="delete ${e.isComplete ? 'hidden' : 'visible'}">x</p>
+            </div>`;
+}
 
+buttonE.addEventListener('click', createTodo)
+todoFormE.addEventListener('keyup', changeTodoForm)
+respE.addEventListener('click', clickTodoItem)
+
+function clickTodoItem(e) {
+    const id = e.target.closest('.todo-item').getAttribute('key');
+    if (e.target.classList.contains('delete')) {
+        deleteTodo(id)
+    }
+    if (e.target.classList.contains('complete')) {
+        completeTodo(id);
+    }
+    if (e.target.classList.contains('inProcess')) {
+        openEditForm(id)
+    }
+}
+
+function openEditForm(id) {
+    const currentTodo = todoList.find(el => el.id === id)
+    controlE.innerHTML = ''
+    const editedInputTitle = document.createElement('input'),
+        editedInputBody = document.createElement('input'),
+        submitEditedTodoButton = document.createElement('button');
+    editedInputTitle.value = currentTodo.title;
+    editedInputTitle.id = 'editedTitle';
+    editedInputBody.value = currentTodo.body;
+    editedInputBody.id = 'editedBody';
+
+    submitEditedTodoButton.setAttribute('key', currentTodo.id);
+    submitEditedTodoButton.innerText = 'edit todo';
+    controlE.classList.add('filled')
+    controlE.append(editedInputTitle, editedInputBody, submitEditedTodoButton)
+}
+
+controlE.addEventListener('click', submitEditTodo,)
+
+function submitEditTodo(e) {
+    if (e.target.localName === 'button') {
+        const key = e.target.getAttribute('key');
+        const todo = todoList.find(el => el.id === key)
+        todo.body = document.getElementById('editedBody').value
+        todo.title = document.getElementById('editedTitle').value
+        api.editTodo(todo).then(r => {
+            afterRequestManipulation(r)
+            controlE.innerHTML = '';
+            controlE.classList.remove('filled');
+        })
+    }
+}
+
+function createTodo(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    api.createTodo(todoCreateTitleE.value, todoCreateBodyE.value).then(r => {
+        afterRequestManipulation(r)
+    });
+    clearForm();
+}
+
+function deleteTodo(id) {
+    let deleteTodo = confirm('u sure want to delete this awesome Todo item?')
+    if (deleteTodo) {
+        api.deleteTodo(id).then(r => {
+            afterRequestManipulation(r)
+        })
+    }
+}
+
+function afterRequestManipulation(r) {
+    if ((r.statusCode && r.statusCode !== 200) || (r.status && r.status !== 200)) {
+        renderError(r.statusCode || r.status);
+    } else {
+        renderResponce();
+    }
+}
+
+function completeTodo(id) {
+    let completeTodo = confirm('u sure want to complete this item?')
+    if (completeTodo) {
+        const currentTodo = todoList.find(el => el.id === id)
+        api.completeTodo(currentTodo).then(r => {
+            afterRequestManipulation(r)
+        })
+    }
+}
+
+function changeTodoForm() {
+    isFieldsNotEmpty()
+}
+
+function clearForm() {
+    todoFormE.reset()
+    buttonE.disabled = true;
+}
+
+function isFieldsNotEmpty() {
+    let isDisabled = false;
+    todoFormInputsE.forEach(i => {
+        if (!i.value.length) {
+            isDisabled = true;
+        }
+    })
+    isDisabled ? buttonE.disabled = true : buttonE.disabled = false;
 }
 
 function renderError(e) {
     const error = ERRORS_LIST[e];
-    for(key in error) {
+    for (key in error) {
         const errorString = document.createElement('p')
         errorString.innerHTML = `${key} : ${error[key]}`;
-        respE.append(errorString)
+        errorString.style.color = 'red';
+        respE.prepend(errorString)
+        setTimeout(function () {
+            errorString.remove();
+        }, 5000)
     }
 }
 

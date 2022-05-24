@@ -6,12 +6,19 @@
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Volkov HomeWork</title>
+        <script src="js/api/api.js" defer></script>
         <script src="js/script.js" defer></script>
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
-        <input type="text" id="username">
-        <button type="submit" id="submitRequest">submit</button>
-        <div id="responce"></div>
+        <form id="todoForm">
+            <input type="text" id="title" class="createInput" name="title">
+            <input type="text" id="body" class="createInput" name="body">
+            <button type="submit" id="submitCreate" disabled>submit</button>
+        </form>
+        <div class="d-flex">
+            <div id="responce"></div>
+            <div id="control_panel"></div>
+        </div>
     </body>
 </html>
