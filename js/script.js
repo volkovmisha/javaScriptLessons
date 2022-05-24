@@ -34,7 +34,7 @@ function renderToDoItem(e) {
                 <p>${e.isComplete ? new Date(e.completeDate).toLocaleString("ru") : new Date(e.createDate).toLocaleString("ru")}</p>
             </div>
              <p class="complete ${e.isComplete ? 'hidden' : 'visible'}" >Finish</p>
-             <p class="delete ${e.isComplete ? 'hidden' : 'visible'}">x</p>
+             <p class="delete">x</p>
             </div>`;
 }
 
@@ -43,15 +43,18 @@ todoFormE.addEventListener('keyup', changeTodoForm)
 respE.addEventListener('click', clickTodoItem)
 
 function clickTodoItem(e) {
-    const id = e.target.closest('.todo-item').getAttribute('key');
-    if (e.target.classList.contains('delete')) {
-        deleteTodo(id)
-    }
-    if (e.target.classList.contains('complete')) {
-        completeTodo(id);
-    }
-    if (e.target.classList.contains('inProcess')) {
-        openEditForm(id)
+   const target = e.target.closest('.todo-item');
+    if(target) {
+        const id = target.getAttribute('key');
+        if (e.target.classList.contains('delete')) {
+            deleteTodo(id)
+        }
+        if (e.target.classList.contains('complete')) {
+            completeTodo(id);
+        }
+        if (e.target.classList.contains('inProcess')) {
+            openEditForm(id)
+        }
     }
 }
 
