@@ -59,6 +59,7 @@
 }
 .finished {
     background-color: rgba(0, 255, 0, 0.2);
+    position: relative;
 }
 .inProcess {
     background-color: rgba(255, 255, 0, 0.2);

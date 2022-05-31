@@ -1,15 +1,15 @@
 class Api {
-    #endpoint = 'http://nestapi-env.eba-9kgvuxij.eu-central-1.elasticbeanstalk.com/todos';
+    #endpoint = 'http://nestapi-env.eba-9kgvuxij.eu-central-1.elasticbeanstalk.com/contacts';
 
-    getTodos() {
+    getContacts() {
         return  fetch(this.#endpoint).then(r => r.json())
     }
 
-    createTodo(title,body) {
+    createContact(name,lastName,phone) {
        const formData = {
-               title: title,
-               body: body,
-               isComplete: false
+               name: name,
+               lastName: lastName,
+               phone: phone,
            };
        return fetch(this.#endpoint,{
             method: 'POST',
@@ -20,7 +20,7 @@ class Api {
         }).then(r => r.json())
     }
 
-    deleteTodo(id) {
+    deleteContact(id) {
         const url = this.#endpoint+ '/' + id
         return fetch(url,{
             method: 'DELETE',
@@ -30,20 +30,7 @@ class Api {
         }).then(r => r.json())
     }
 
-    completeTodo(formData) {
-        formData.isComplete = true;
-        console.log(formData)
-        const url = this.#endpoint+ '/' + formData.id
-        return fetch(url,{
-            method: 'PUT',
-            body: JSON.stringify(formData),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-    }
-    editTodo(formData) {
-        console.log(formData)
+    editContact(formData) {
         const url = this.#endpoint+ '/' +   formData.id
         return fetch(url,{method: 'PUT',
             body: JSON.stringify(formData),
