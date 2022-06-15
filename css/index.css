@@ -1,4 +1,14 @@
-
+@keyframes linkHover
+25%
+-webkit-transform: rotate(-20deg)
+transform: rotate(-20deg)
+75%
+-webkit-transform: rotate(20deg)
+transform: rotate(20deg)
+]t-transform: scale(1.01) rotate(0deg)
+transform: scale(1.01) rotate(0deg)
+]it-transform: scale(1.4) rotate(5deg)
+transform: scale(1.4) rotate(5deg)
 @font-face
 font-family: 'Geometria'
 src: url('fonts/Geometria-Bold.eot')
@@ -9,6 +19,9 @@ url('fonts/Geometria-Bold.ttf') format('truetype')
 font-weight: bold
 font-style: normal
 
+@keyframes case
+0%
+-webkit-transform: scale(1.01) rotate(0deg)
 @font-face
 font-family: 'Geometria'
 src: url('fonts/Geometria-Medium.eot')
