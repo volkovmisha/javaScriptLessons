@@ -1,44 +1,27 @@
-.square {
-    width: 100px;
-    height: 100px;
-    background: red;
-    transition: all ease-in-out 0.3s;
-    /*
-    255 0 0
+@keyframes linkHover
+25%
+-webkit-transform: rotate(-20deg)
+transform: rotate(-20deg)
+75%
+-webkit-transform: rotate(20deg)
+transform: rotate(20deg)
+@-webkit-keyframes scaleHover
+50%
+-webkit-transform: scale(1.25)
+transform: scale(1.25)
+@keyframes scaleHover
+50%
+-webkit-transform: scale(1.25)
+transform: scale(1.25)
+@-webkit-keyframes case
+0%
+-webkit-transform: scale(1.01) rotate(0deg)
+transform: scale(1.01) rotate(0deg)
 
-    rgb
-    hsl
-     */
-    filter: hue-rotate(0);
-}
-.square:hover {
-    filter: hue-rotate(180deg);
-}
-.div1 {
-    transition: all ease-in-out 0.3s;
-    filter: saturate(1);
-}
-.div2:hover {
-    filter: grayscale(0);
-}
+to
+-webkit-transform: scale(1.4) rotate(5deg)
+transform: scale(1.4) rotate(5deg)
 
-.div3 {
-    transition: all ease-in-out 0.3s;
-    filter: sepia(1);
-}
-.div3:hover {
-    filter: sepia(0);
-    background: red;
-}
-
-.div4 {
-    transition: all ease-in-out 0.3s;
-    filter: invert(1);
-    /*
-    rgb 255 255 255
-    # 00 ff 00
-    */
-}
-.div4:hover {
-    filter: invert(0);
-}
+@keyframes case
+0%
+-webkit-transform: scale(1.01) rotate(0deg)
